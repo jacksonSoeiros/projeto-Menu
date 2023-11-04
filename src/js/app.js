@@ -4,11 +4,18 @@ $(document).ready(function () {
 
 var cardapio = {};
 
+var MEU_CARRINHO = [];
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 cardapio.eventos = {
   init: () => {
     cardapio.metodos.obterItensCardapio();
   },
+
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 cardapio.metodos = {
   // obter a lista do cardapio //
@@ -18,14 +25,15 @@ cardapio.metodos = {
 
     if (!viewPlus) {
       $("#itens-cardapio").html("");
-      $("#btn-verMais").removeClass('hidden');
+      $("#btn-verMais").removeClass("hidden");
     }
 
     $.each(filtro, (i, e) => {
       let temp = cardapio.templates.item
         .replace(/\${img}/g, e.img)
         .replace(/\${nome}/g, e.name)
-        .replace(/\${preco}/g, e.price.toFixed(2).replace(".", ","));
+        .replace(/\${preco}/g, e.price.toFixed(2).replace(".", ","))
+        .replace(/\${id}/g, e.id);
 
       //btn ver mais foi chamado
       if (viewPlus && i >= 8 && i < 12) {
@@ -46,20 +54,77 @@ cardapio.metodos = {
 
   //chamar o btn verMais
   viewPlus: () => {
-
-    var ativo = $(".container-menu a.active").attr('id').split('menu-')[1]; //[menu-][Burges]
+    var ativo = $(".container-menu a.active").attr("id").split("menu-")[1]; //[menu-][Burges]
     cardapio.metodos.obterItensCardapio(ativo, true);
 
-    $("#btn-verMais").addClass('hidden');
-
+    $("#btn-verMais").addClass("hidden");
   },
 
+  //remover um item
+  minusUnit: (id) => {
+    let UnitsAtual = parseInt($("#units-" + id).text());
+
+    if (UnitsAtual > 0) {
+      $("#units-" + id).text(UnitsAtual - 1);
+    }
+  },
+
+  //adicionar mais um item
+  addUnit: (id) => {
+    let UnitsAtual = parseInt($("#units-" + id).text());
+
+    $("#units-" + id).text(UnitsAtual + 1);
+  },
+
+  //adicionar ao carrinho os itens
+  addCarrinho: (id) => {
+
+    let UnitsAtual = parseInt($("#units-" + id).text());
+
+    if (UnitsAtual > 0) {
+      //obter a categoria ativa
+      var categoria = $(".container-menu a.active").attr("id").split("menu-")[1];
+
+      //obeter lista de itens
+      let filtro = MENU[categoria];
+
+      //obter o item
+      let item = $.grep(filtro, (e,i) => {return e.id == id});
+
+
+      if (item.length > 0) {
+
+        //verificar se já existe o item
+        let existe = $.grep(MEU_CARRINHO, (l,x) => {return l.id == id});
+
+        //caso exista altera quantidade
+        if(existe.length >0) {
+          let objIndex = MEU_CARRINHO.findIndex((obj => obj.id == id));
+          MEU_CARRINHO[objIndex].qntd = MEU_CARRINHO[objIndex].qntd + UnitsAtual;
+        }
+        //caso não exista, add ele
+        else{
+          item[0].qntd = UnitsAtual;
+          MEU_CARRINHO.push(item[0]);
+        }
+
+        //zerar a quandidade dos itens
+        $("#units-" + id).text(0);
+
+        
+      }
+
+    }
+
+  },
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 cardapio.templates = {
   item: `
     <div class="col-3 mb-5">
-        <div class="card card-item">
+        <div class="card card-item" id="\${id}">
             <div class="img-produto">
                 <img src="\${img}"/>
             </div>
@@ -70,10 +135,10 @@ cardapio.templates = {
                 <b>R$\${preco}</b>
             </p>
             <div class="add-carrinho">
-                <span class="btn-menos"> <i class="fas fa-minus"></i></span>
-                <span class="add-numero-itens">0</span>
-                <span class="btn-mais"><i class="fas fa-plus"></i></span>
-                <span class="btn btn-add"><i class="fa fa-shopping-bag"></i></span>
+                <span class="btn-menos" onclick="cardapio.metodos.minusUnit('\${id}')"><i class="fas fa-minus"></i></span>
+                <span class="add-numero-itens" id="units-\${id}">0</span>
+                <span class="btn-mais" onclick="cardapio.metodos.addUnit('\${id}')"><i class="fas fa-plus"></i></span>
+                <span class="btn btn-add" onclick="cardapio.metodos.addCarrinho('\${id}')"><i class="fa fa-shopping-bag"></i></span>
           </div>
         </div>
     </div>

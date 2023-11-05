@@ -407,34 +407,15 @@
         <div class="container">
 
           <div class="row mr-0 ml-0 hidden" id="itens-carrinho">
-            <div class="col-12 item-carrinho">
-              <div class="img-produto">
-                <img
-                  src="./src/img/cardapio/burguers/Gramercy-Tavern-Burger-and-Kielbasa-Kit-6.4.21-72ppi-1x1-15.jpg"
-                  alt="Img-Burguer-01"
-                />
-              </div>
-              <div class="dados-produto">
-                <p class="title-produto"><b>Nome do Produto</b></p>
-                <p class="price-produto"><b>R$ 99,90</b></p>
-              </div>
-
-              <div class="add-carrinho">
-                <span class="btn-menos"> <i class="fas fa-minus"></i></span>
-                <span class="add-numero-itens">3</span>
-                <span class="btn-mais"><i class="fas fa-plus"></i></span>
-                <span class="btn btn-remove"><i class="fa fa-times"></i></span>
-              </div>
-            </div>
+            
           </div>
 
           <div class="row mr-0 ml-0 hidden" id="local-entrega">
             <div class="col-4">
               <div class="form-group container-cep">
                 <label>CEP:</label>
-                <input id="textCEP" type="text" class="form-control" />
-                <a class="btn btn-yellow btn-sm"
-                  ><i class="fa fa-search"></i
+                <input id="txtCEP" type="text" class="form-control" />
+                <a class="btn btn-yellow btn-sm" onclick="cardapio.metodos.buscarCep()"><i class="fa fa-search"></i
                 ></a>
               </div>
             </div>
@@ -444,35 +425,35 @@
             <div class="col-6">
               <div class="form-group">
                 <label>Endereço:</label>
-                <input id="textEndereco" type="text" class="form-control" />
+                <input id="txtEndereco" type="text" class="form-control" />
               </div>
             </div>
 
             <div class="col-4">
               <div class="form-group">
                 <label>Bairro:</label>
-                <input id="textBairro" type="text" class="form-control" />
+                <input id="txtBairro" type="text" class="form-control" />
               </div>
             </div>
 
             <div class="col-2">
               <div class="form-group">
                 <label>Número:</label>
-                <input id="testNumero" type="text" class="form-control" />
+                <input id="txtNumero" type="text" class="form-control" />
               </div>
             </div>
 
             <div class="col-6">
               <div class="form-group">
                 <label>Cidade:</label>
-                <input id="textCidade" type="text" class="form-control" />
+                <input id="txtCidade" type="text" class="form-control" />
               </div>
             </div>
 
             <div class="col-4">
               <div class="form-group">
                 <label>Complemento:</label>
-                <input id="textComplemento" type="text" class="form-control" />
+                <input id="txtComplemento" type="text" class="form-control" />
               </div>
             </div>
 
@@ -513,7 +494,7 @@
             </div>
           </div>
 
-          <div class="row mr-0 ml-0" id="resumo-carrinho">
+          <div class="row mr-0 ml-0 hidden" id="resumo-carrinho">
             <div class="col-12">
               <p class="title-carrinho mt-4">
                 <b>Itens do Pedido:</b>
@@ -574,34 +555,33 @@
           <div class="container-total text-right mb-4">
             <p class="mb-0">
               <span>Subtotal:</span>
-              <span id="lblSubeTotal">R$ 39,00</span>
+              <span id="lblSubeTotal">R$ 0,00</span>
             </p>
 
             <p class="mb-0 text-entrega">
               <span><i class="fas fa-motorcycle"></i> Entrega:</span>
-              <span id="lblValorEntrega">+ R$ 7,00</span>
+              <span id="lblValorEntrega">+ R$ 0,00</span>
             </p>
 
             <p class="mb-0 text-total">
               <span><b>Total:</b></span>
-              <span class="valor-total" id="lblValorTotal"
-                ><b>R$ 46,00</b></span
+              <span class="valor-total"><b id="lblValorTotal">R$ 0,00</b></span
               >
             </p>
           </div>
-          <a class="brt btn-yellow float-right" id="btnEtapaPedido">
+          <a class="brt btn-yellow float-right" id="btnEtapaPedido" onclick="cardapio.metodos.carregarEndereco()">
             Continuar
           </a>
 
-          <a class="brt btn-yellow float-right hidden" id="btnEtapaEndereco">
+          <a class="brt btn-yellow float-right hidden" id="btnEtapaEndereco" onclick="cardapio.metodos.resumoPedido()">
             Revisar Pedido
           </a>
 
-          <a class="brt btn-yellow float-right hidden" id="btnEtapaResumo">
+          <a class="brt btn-yellow float-right hidden" id="btnEtapaResumo" >
             Enviar Pedido
           </a>
 
-          <a class="brt btn-white float-right mr-3 hidden" id="btnVoltar">
+          <a class="brt btn-white float-right mr-3 hidden" id="btnVoltar" onclick="cardapio.metodos.voltarEtapas()">
             Voltar
           </a>
         </div>

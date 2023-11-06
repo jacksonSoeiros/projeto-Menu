@@ -10,6 +10,8 @@ var MEU_ENDERECO = null;
 var VALOR_CARRINHO = 0;
 var VALOR_ENTREGA = 7;
 
+var CELULAR_EMPRESA = '5591983645949';
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 cardapio.eventos = {
@@ -368,6 +370,8 @@ cardapio.metodos = {
 
   //validar antes de resumo pedidos
   resumoPedido: () => {
+
+    // let nome = $("#txtNome").val().trim();
     let cep = $("#txtCEP").val().trim();
     let endereco = $("#txtEndereco").val().trim();
     let bairro = $("#txtBairro").val().trim();
@@ -375,7 +379,13 @@ cardapio.metodos = {
     let uf = $("#ddlUF").val().trim();
     let numero = $("#txtNumero").val().trim();
     let complemento = $("#txtComplemento").val().trim();
+    
 
+    // if (cnome.length <= 0) {
+    //   cardapio.metodos.mensagens("Informe seu Nome!");
+    //   $("#txtNome").focus();
+    //   return;
+    // }
     if (cep.length <= 0) {
       cardapio.metodos.mensagens("Informe o CEP!");
       $("#txtCEP").focus();
@@ -413,13 +423,15 @@ cardapio.metodos = {
     }
 
     MEU_ENDERECO = {
+      
+      // nome: nome,
       cep: cep,
       endereco: endereco,
       bairro: bairro,
       cidade: cidade,
       uf: uf,
       numero: numero,
-      complemento: complemento,
+      complemento: complemento
     };
 
     cardapio.metodos.carregarEtapas(3);
@@ -446,6 +458,46 @@ cardapio.metodos = {
 
     $("#resumo-endereco").html(`${MEU_ENDERECO.endereco}, Nº ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro} ( ${MEU_ENDERECO.complemento} )`);
     $("#cidade-endereco").html(`${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep}`);
+
+    cardapio.metodos.finalizarPedido();
+  },
+
+  //carrega o link do whatsApp
+  finalizarPedido: () => {
+
+    if (MEU_CARRINHO.length >0 && MEU_CARRINHO != null) {
+
+      var texto = 'Olá, gostaria de fazer um pedido:';
+      texto += `\n*Itens do Pedido:*\n\${itens}`;
+      texto += '\n*Endereço de Entrega:*';
+      texto += `\n${MEU_ENDERECO.endereco}, Nº ${MEU_ENDERECO.numero}, ${MEU_ENDERECO.bairro}\n${MEU_ENDERECO.complemento}`;
+      texto += `\n${MEU_ENDERECO.cidade}-${MEU_ENDERECO.uf} / ${MEU_ENDERECO.cep}`;
+      texto += `\n\n*Total (Com Entrega!): R$ ${(VALOR_CARRINHO + VALOR_ENTREGA).toFixed(2).replace('.',',')}*`;
+
+      var itens = '';
+
+      $.each(MEU_CARRINHO, (i, e) => {
+
+        itens += `*${e.qntd}x* ${e.name} ....... R$ ${e.price.toFixed(2).replace('.',',')} \n`;
+
+        if ((i + 1) == MEU_CARRINHO.length) {
+
+          texto = texto.replace(/\${itens}/g, itens);
+
+          console.log(texto);
+          //converte a url
+          let encode = encodeURI(texto);
+          let URL = `https://wa.me/${CELULAR_EMPRESA}?text=${encode}`;
+
+          $("#btnEtapaResumo").attr('href', URL);
+
+        }
+
+        // 
+
+
+      });
+    }
   },
 
   //mensagem de itens adicionado ao carrinho

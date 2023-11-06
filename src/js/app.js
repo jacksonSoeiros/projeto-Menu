@@ -10,6 +10,8 @@ var MEU_ENDERECO = null;
 var VALOR_CARRINHO = 0;
 var VALOR_ENTREGA = 7;
 
+var INSTAGRAM_EMPRESA = 'https://www.instagram.com/soeiro.jackson/';
+var FACEBOOK_EMPRESA = 'https://www.facebook.com/soeiro.jackson/';
 var CELULAR_EMPRESA = '5591983645949';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,6 +19,8 @@ var CELULAR_EMPRESA = '5591983645949';
 cardapio.eventos = {
   init: () => {
     cardapio.metodos.obterItensCardapio();
+    cardapio.metodos.carregarSocialInstagram();
+    cardapio.metodos.carregarSocialFacebook();
     cardapio.metodos.carregarSocialWhatsApp();
     cardapio.metodos.carregarBntLigar();
     cardapio.metodos.carregarBtnReserva();
@@ -521,6 +525,25 @@ cardapio.metodos = {
 
     $("#btn-ligar").attr('href', `tel:${CELULAR_EMPRESA}`);
 
+  },
+
+  //carrega o bnt com o link instagram
+  carregarSocialInstagram: () => {
+
+    let URL = `${INSTAGRAM_EMPRESA}`;
+
+    $("#btn-instagram-1").attr('href', URL);
+    $("#btn-instagram-2").attr('href', URL);
+
+  },
+
+  //carrega o bnt com o link facebook
+  carregarSocialFacebook: () => {
+
+    let URL = `${FACEBOOK_EMPRESA}`;
+
+    $("#btn-facebook-1").attr('href', URL);
+    $("#btn-facebook-2").attr('href', URL);
   },
 
   //carrega o bnt com o link whatsApp

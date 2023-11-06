@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./src/css/style.css" />
     <link rel="stylesheet" href="./src/css/animate.css" />
   </head>
+
   <body>
 
     <div id="container-mensagens" class="container-mensagens">
@@ -82,9 +83,9 @@
                 casa de forma rápida e segura.
               </p>
               <div>
-                <a class="btn btn-yellow mt-4 mr-3"> Ver Cardápio </a>
+                <a href="#cardapio"  class="btn btn-yellow mt-4 mr-3" > Ver Cardápio </a>
 
-                <a class="btn btn-white btn-icon-left mt-4" href="#">
+                <a class="btn btn-white btn-icon-left mt-4" href="#" id="btn-ligar">
                   <span class="icon-left">
                     <i class="fa fa-phone"></i>
                   </span>
@@ -92,13 +93,13 @@
                 </a>
               </div>
             </div>
-            <a class="btn btn-sm btn-white btn-social mt-4 mr-3">
+            <a href="https://www.instagram.com/soeiro.jackson/" class="btn btn-sm btn-white btn-social mt-4 mr-3" target="_blank">
               <i class="fab fa-instagram"></i>
             </a>
-            <a class="btn btn-sm btn-white btn-social mt-4 mr-3">
+            <a href="https://www.facebook.com/soeiro.jackson" class="btn btn-sm btn-white btn-social mt-4 mr-3" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <a class="btn btn-sm btn-white btn-social mt-4">
+            <a href="#" id="btn-whatsApp-1" class="btn btn-sm btn-white btn-social mt-4" target="_blank">
               <i class="fab fa-whatsapp"></i>
             </a>
           </div>
@@ -242,6 +243,7 @@
               <b>O que dizem sobre nós?</b>
             </h1>
             <div class="mb-5">
+
               <div class="depoimento" id="depoimento-1">
                 <div class="container-dados-depoimento">
                   <div class="imagem-depoimento"></div>
@@ -316,11 +318,12 @@
                   <i class="fas fa-quote-right"></i>
                 </p>
               </div>
+
             </div>
 
-            <a class="btn btn-sm btn-white btn-social mr-3 active">1</a>
-            <a class="btn btn-sm btn-white btn-social mr-3">2</a>
-            <a class="btn btn-sm btn-white btn-social">3</a>
+            <a id="btnDepoimento-1" class="btn btn-sm btn-white btn-social mr-3 active" onclick="cardapio.metodos.abrirDepoimento(1)">1</a>
+            <a id="btnDepoimento-2" class="btn btn-sm btn-white btn-social mr-3" onclick="cardapio.metodos.abrirDepoimento(2)">2</a>
+            <a id="btnDepoimento-3" class="btn btn-sm btn-white btn-social" onclick="cardapio.metodos.abrirDepoimento(3)">3</a>
           </div>
         </div>
       </div>
@@ -342,7 +345,7 @@
                     <br />
                     Reserve sua data e horário de forma simples e rápida.
                   </p>
-                  <a class="btn btn-yellow mt-4">Fazer reserva</a>
+                  <a class="btn btn-yellow mt-4" href="#" id="btn-reserna" target="_blank">Fazer reserva</a>
                 </div>
 
                 <div class="col-5">
@@ -374,13 +377,13 @@
             </p>
           </div>
           <div class="col-3 container-redes-footer">
-            <a class="btn btn-sm btn-white btn-social mr-3">
+            <a href="https://www.instagram.com/soeiro.jackson/" class="btn btn-sm btn-white btn-social mr-3" target="_blank">
               <i class="fab fa-instagram"></i>
             </a>
-            <a class="btn btn-sm btn-white btn-social mr-3">
+            <a href="https://www.facebook.com/soeiro.jackson" class="btn btn-sm btn-white btn-social mr-3" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <a class="btn btn-sm btn-white btn-social">
+            <a href="#" id="btn-whatsApp-2" class="btn btn-sm btn-white btn-social" target="_blank">
               <i class="fab fa-whatsapp"></i>
             </a>
           </div>
@@ -564,7 +567,7 @@
             Revisar Pedido
           </a>
 
-          <a href="#" class="brt btn-yellow float-right hidden" id="btnEtapaResumo" target="_blank">
+          <a style="text-decoration: none;" href="#" class="brt btn-yellow float-right hidden" id="btnEtapaResumo" target="_blank">
             Enviar Pedido
           </a>
 

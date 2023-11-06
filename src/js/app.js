@@ -17,6 +17,10 @@ var CELULAR_EMPRESA = '5591983645949';
 cardapio.eventos = {
   init: () => {
     cardapio.metodos.obterItensCardapio();
+    cardapio.metodos.carregarSocialWhatsApp();
+    cardapio.metodos.carregarBntLigar();
+    cardapio.metodos.carregarBtnReserva();
+    
   },
 };
 
@@ -498,6 +502,53 @@ cardapio.metodos = {
 
       });
     }
+  },
+
+  //carrega o link bnt Reserva
+  carregarBtnReserva: () => {
+
+    var texto = 'Olá, gostaria de fazer uma *reserva*!';
+
+    let encode = encodeURI(texto);
+    let URL = `https://wa.me/${CELULAR_EMPRESA}?text=${encode}`;
+
+    $("#btn-reserna").attr('href', URL);
+
+  },
+
+  //carrega o bnt com o link de ligção 
+  carregarBntLigar: () => {
+
+    $("#btn-ligar").attr('href', `tel:${CELULAR_EMPRESA}`);
+
+  },
+
+  //carrega o bnt com o link whatsApp
+  carregarSocialWhatsApp: () => {
+
+    var texto = 'Olá, *Altere o Texto aqui!*';
+
+    let encode = encodeURI(texto);
+    let URL = `https://wa.me/${CELULAR_EMPRESA}?text=${encode}`;
+
+    $("#btn-whatsApp-1").attr('href', URL);
+    $("#btn-whatsApp-2").attr('href', URL);
+  },
+
+  //abri o depoimento 
+  abrirDepoimento: (depoimento) => {
+
+    $("#depoimento-1").addClass('hidden');
+    $("#depoimento-2").addClass('hidden');
+    $("#depoimento-3").addClass('hidden');
+
+    $("#btnDepoimento-1").removeClass('active');
+    $("#btnDepoimento-2").removeClass('active');
+    $("#btnDepoimento-3").removeClass('active');
+
+    $("#depoimento-" + depoimento).removeClass('hidden');
+    $("#btnDepoimento-" + depoimento).addClass('active');
+
   },
 
   //mensagem de itens adicionado ao carrinho

@@ -172,6 +172,7 @@ cardapio.metodos = {
         $("#lblTituloEtapa").text("Seu Carrinho:");
         $("#itens-carrinho").removeClass("hidden");
         $("#local-entrega").addClass("hidden");
+        $("#Pagamento").addClass("hidden");
         $("#resumo-carrinho").addClass("hidden");
 
         $(".etapa").removeClass("active");
@@ -179,6 +180,7 @@ cardapio.metodos = {
 
         $("#btnEtapaPedido").removeClass("hidden");
         $("#btnEtapaEndereco").addClass("hidden");
+        $("#btnEtapaPagamento").addClass("hidden");
         $("#btnEtapaResumo").addClass("hidden");
         $("#btnVoltar").addClass("hidden");
 
@@ -188,24 +190,28 @@ cardapio.metodos = {
         $("#lblTituloEtapa").text("Endereço de Entrega:");
         $("#itens-carrinho").addClass("hidden");
         $("#local-entrega").removeClass("hidden");
+        $("#Pagamento").addClass("hidden");
         $("#resumo-carrinho").addClass("hidden");
 
         $(".etapa").removeClass("active");
         $(".etapa1").addClass("active");
         $(".etapa2").addClass("active");
+    
 
         $("#btnEtapaPedido").addClass("hidden");
         $("#btnEtapaEndereco").removeClass("hidden");
+        $("#btnEtapaPagamento").addClass("hidden");
         $("#btnEtapaResumo").addClass("hidden");
         $("#btnVoltar").removeClass("hidden");
 
         break;
 
       case 3:
-        $("#lblTituloEtapa").text("Resumo do Pedido:");
+        $("#lblTituloEtapa").text("Forma de Pagamento:");
         $("#itens-carrinho").addClass("hidden");
         $("#local-entrega").addClass("hidden");
-        $("#resumo-carrinho").removeClass("hidden");
+        $("#Pagamento").removeClass("hidden");
+        $("#resumo-carrinho").addClass("hidden");
 
         $(".etapa").removeClass("active");
         $(".etapa1").addClass("active");
@@ -214,7 +220,30 @@ cardapio.metodos = {
 
         $("#btnEtapaPedido").addClass("hidden");
         $("#btnEtapaEndereco").addClass("hidden");
-        $("#btnEtapaResumo").removeClass("hidden");
+        $("#btnEtapaPagamento").removeClass("hidden");
+        $("#btnEtapaResumo").addClass("hidden");
+        $("#btnVoltar").removeClass("hidden");
+
+        break;
+
+        case 4:
+        $("#lblTituloEtapa").text("Resumo do Pedido:");
+        $("#itens-carrinho").addClass("hidden");
+        $("#local-entrega").addClass("hidden");
+        $("#Pagamento").addClass("hidden");
+        $("#resumo-carrinho").removeClass("hidden");
+        
+
+        $(".etapa").removeClass("active");
+        $(".etapa1").addClass("active");
+        $(".etapa2").addClass("active");
+        $(".etapa3").addClass("active");
+        $(".etapa4").addClass("active");
+
+        $("#btnEtapaPedido").addClass("hidden");
+        $("#btnEtapaEndereco").addClass("hidden");
+        $("#btnEtapaPagamento").removeClass("hidden");
+        $("#btnEtapaResumo").addClass("hidden");
         $("#btnVoltar").removeClass("hidden");
 
         break;
@@ -376,6 +405,11 @@ cardapio.metodos = {
     }
   },
 
+  //carregar a etapa de Forma de pagamento
+  carregarPagamento: () => {
+    cardapio.metodos.carregarEtapas(3);
+  },
+
   //validar antes de resumo pedidos
   resumoPedido: () => {
 
@@ -442,7 +476,7 @@ cardapio.metodos = {
       complemento: complemento
     };
 
-    cardapio.metodos.carregarEtapas(3);
+    cardapio.metodos.carregarEtapas(4);
     cardapio.metodos.carregarResumo();
 
   },
